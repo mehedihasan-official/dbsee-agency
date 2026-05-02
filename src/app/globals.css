@@ -1,17 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --color-primary: #ff6b35;
-    --color-primary-dark: #e55a24;
-    --color-dark: #0a0a0a;
-    --color-dark-card: #141414;
-    --color-dark-border: #222222;
-    --color-dark-muted: #888888;
+@theme {
+  --color-primary: #ff6b35;
+  --color-primary-dark: #e55a24;
+  --color-dark: #0a0a0a;
+  --color-dark-card: #141414;
+  --color-dark-border: #222222;
+  --color-dark-muted: #888888;
+
+  --font-family-sans: Inter, sans-serif;
+  --font-family-heading: Syne, sans-serif;
+
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-fade-up: fadeUp 0.6s ease forwards;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
   }
 
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(24px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
   html {
     scroll-behavior: smooth;
   }
@@ -42,10 +56,4 @@
     margin-left: auto;
     margin-right: auto;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
