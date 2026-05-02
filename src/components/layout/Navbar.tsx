@@ -1,22 +1,69 @@
 "use client";
 
+import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Services", href: "/" },
+
+
+  {
+    label: "Services",
+    href: "/services",
+    submenu: [
+      {
+        label: "Social Media Management",
+        href: "/",
+      },
+      {
+        label: "Social Media Advertising",
+        href: "/",
+      },
+      { label: "TikTok Ads", href: "/" },
+      { label: "Google Ads", href: "/" },
+      { label: "Video Production", href: "/" },
+      { label: "Coaching & Training", href: "/" },
+    ],
+  },
+
+
+  // {
+  //   label: "Services",
+  //   href: "/services",
+  //   submenu: [
+  //     {
+  //       label: "Social Media Management",
+  //       href: "/services/social-media-management",
+  //     },
+  //     {
+  //       label: "Social Media Advertising",
+  //       href: "/services/social-media-advertising",
+  //     },
+  //     { label: "TikTok Ads", href: "/services/tiktok-ads" },
+  //     { label: "Google Ads", href: "/services/google-ads" },
+  //     { label: "Video Production", href: "/services/video-production" },
+  //     { label: "Coaching & Training", href: "/services/coaching-training" },
+  //   ],
+  // },
+
+
   { label: "Portfolio", href: "/" },
-  { label: "Contact", href: "/" },
-  { label: "Limited Time Offer", href: "/limited-time-offer" },
+  { label: "Blog", href: "/" },
+  { label: "Contact", href: "/contact" },
+  { label: "Limited Time Offer", href: "/" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [servicesTimeout, setServicesTimeout] = useState<NodeJS.Timeout | null>(
+    null,
+  );
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -31,8 +78,18 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (servicesTimeout) {
+        clearTimeout(servicesTimeout);
+      }
+    };
+  }, [servicesTimeout]);
 
   return (
     <nav
@@ -42,7 +99,6 @@ export function Navbar() {
     >
       {/* ── Main bar ── */}
       <div className="max-w-7xl mx-auto px-6 h-16 grid grid-cols-[auto_1fr_auto] items-center gap-6">
-
         {/* LEFT — Logo */}
         <Link href="/" className="shrink-0 flex items-center">
           <span className="font-heading font-bold text-white text-xl tracking-tight leading-none">
@@ -53,27 +109,86 @@ export function Navbar() {
         {/* CENTRE — Desktop nav links */}
         <div className="hidden lg:flex items-center justify-center gap-7">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive =
+              pathname === link.href ||
+              (link.submenu &&
+                link.submenu.some((sub) => pathname === sub.href));
             const isOffer = link.label === "Limited Time Offer";
+            const hasSubmenu = link.submenu;
+
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={
-                  isOffer
-                    ? "text-sm font-medium text-primary hover:text-primary-dark transition-colors whitespace-nowrap"
-                    : isActive
-                    ? "text-sm font-medium text-white transition-colors whitespace-nowrap"
-                    : "text-sm font-medium text-white/60 hover:text-white transition-colors whitespace-nowrap"
-                }
-              >
-                {link.label}
-              </Link>
+              <div key={link.href} className="relative">
+                {hasSubmenu ? (
+                  <div
+                    className="relative"
+                    onMouseEnter={() => {
+                      if (servicesTimeout) {
+                        clearTimeout(servicesTimeout);
+                        setServicesTimeout(null);
+                      }
+                      setServicesOpen(true);
+                    }}
+                    onMouseLeave={() => {
+                      const timeout = setTimeout(() => {
+                        setServicesOpen(false);
+                      }, 150); // 150ms delay
+                      setServicesTimeout(timeout);
+                    }}
+                  >
+                    <button
+                      className={`flex items-center gap-1 text-sm font-medium transition-colors whitespace-nowrap ${
+                        isOffer
+                          ? "text-primary hover:text-primary-dark"
+                          : isActive
+                            ? "text-white"
+                            : "text-white/60 hover:text-white"
+                      }`}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${
+                          servicesOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {/* Desktop Submenu */}
+                    {servicesOpen && (
+                      <div className="absolute top-full left-0 mt-2 w-64 bg-dark-card border border-dark-border rounded-xl shadow-xl py-2 z-50">
+                        {link.submenu.map((subLink) => (
+                          <Link
+                            key={subLink.href}
+                            href={subLink.href}
+                            className={`block px-4 py-3 text-sm transition-colors hover:bg-white/5 ${
+                              pathname === subLink.href
+                                ? "text-primary font-medium"
+                                : "text-white/80 hover:text-white"
+                            }`}
+                          >
+                            {subLink.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className={
+                      isOffer
+                        ? "text-sm font-medium text-primary hover:text-primary-dark transition-colors whitespace-nowrap"
+                        : isActive
+                          ? "text-sm font-medium text-white transition-colors whitespace-nowrap"
+                          : "text-sm font-medium text-white/60 hover:text-white transition-colors whitespace-nowrap"
+                    }
+                  >
+                    {link.label}
+                  </Link>
+                )}
+              </div>
             );
           })}
         </div>
-
-        {/* RIGHT — CTA + hamburger */}
         <div className="flex items-center gap-3 justify-end">
           <Link
             href="/request-a-call"
@@ -88,7 +203,11 @@ export function Navbar() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </div>
@@ -111,23 +230,69 @@ export function Navbar() {
         {/* Drawer panel — above backdrop */}
         <div className="relative z-50 bg-black border-t border-white/10 px-6 py-6 flex flex-col gap-1">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive =
+              pathname === link.href ||
+              (link.submenu &&
+                link.submenu.some((sub) => pathname === sub.href));
             const isOffer = link.label === "Limited Time Offer";
+            const hasSubmenu = link.submenu;
+
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className={`py-3 text-sm font-medium border-b border-white/5 last:border-0 transition-colors ${
-                  isOffer
-                    ? "text-primary hover:text-primary-dark"
-                    : isActive
-                    ? "text-white"
-                    : "text-white/60 hover:text-white"
-                }`}
-              >
-                {link.label}
-              </Link>
+              <div key={link.href}>
+                {hasSubmenu ? (
+                  <div>
+                    <button
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      className={`flex items-center justify-between w-full py-3 text-sm font-medium border-b border-white/5 transition-colors ${
+                        isOffer
+                          ? "text-primary hover:text-primary-dark"
+                          : isActive
+                            ? "text-white"
+                            : "text-white/60 hover:text-white"
+                      }`}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+
+                    {/* Mobile Submenu */}
+                    {mobileServicesOpen && (
+                      <div className="ml-4 mt-1 space-y-1">
+                        {link.submenu.map((subLink) => (
+                          <Link
+                            key={subLink.href}
+                            href={subLink.href}
+                            onClick={() => setMobileOpen(false)}
+                            className={`block py-2 text-sm transition-colors ${
+                              pathname === subLink.href
+                                ? "text-primary font-medium"
+                                : "text-white/60 hover:text-white"
+                            }`}
+                          >
+                            {subLink.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`py-3 text-sm font-medium border-b border-white/5 last:border-0 transition-colors ${
+                      isOffer
+                        ? "text-primary hover:text-primary-dark"
+                        : isActive
+                          ? "text-white"
+                          : "text-white/60 hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )}
+              </div>
             );
           })}
 
