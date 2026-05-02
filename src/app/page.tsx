@@ -218,7 +218,7 @@ export default function Home() {
             through innovative digital marketing strategies.
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-white/5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-px bg-white/5">
             {[
               { name: "MG",               bg: "#1c1c1c", text: "#ffffff" },
               { name: "DRAGON CITY",      bg: "#8b1a1a", text: "#ffffff" },
