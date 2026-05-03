@@ -16,7 +16,7 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-block mb-4">
               <span className="font-heading font-bold text-white text-xl tracking-tight">
-                DBSEE
+                <span className="text-primary">DB</span>SEE
               </span>
             </Link>
             <div className="text-white text-sm space-y-1 mb-6">

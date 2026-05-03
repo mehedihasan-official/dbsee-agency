@@ -1,20 +1,14 @@
 import { BlogGrid } from "@/components/blog/BlogGrid";
+import { HeroBanner } from "@/components/layout/HeroBanner";
 
 export default function Blog() {
   return (
     <div>
       {/* Hero */}
-      <section className="section-padding bg-dark-card">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-6">
-            DBSEE Blog
-          </h1>
-          <p className="text-dark-muted text-lg">
-            Industry insights, marketing tips, and strategies to help you grow
-            your business online.
-          </p>
-        </div>
-      </section>
+      <HeroBanner 
+        title="DBSEE Blog" 
+        description="Industry insights, marketing tips, and strategies to help you grow your business online."
+      />
 
       <section className="section-padding">
         <BlogGrid />

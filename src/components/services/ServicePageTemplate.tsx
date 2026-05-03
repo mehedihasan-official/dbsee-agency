@@ -1,6 +1,7 @@
 "use client";
 
 import { CtaBanner } from "@/components/home/CtaBanner";
+import { HeroBanner } from "@/components/layout/HeroBanner";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -23,20 +24,16 @@ export function ServicePageTemplate({ service }: ServicePageTemplateProps) {
   return (
     <div>
       {/* Hero Section */}
-      <section className="section-padding bg-dark-card">
-        <div className="max-w-4xl mx-auto text-center">
-          <Badge className="mb-6">Service</Badge>
-          <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-6">
-            {service.name}
-          </h1>
-          <p className="text-dark-muted text-lg mb-8">
-            {service.shortDescription}
-          </p>
+      <HeroBanner 
+        title={service.name} 
+        description={service.shortDescription}
+      >
+        <div className="mt-8">
           <Button href="/request-a-call" size="lg">
             Get Started Today
           </Button>
         </div>
-      </section>
+      </HeroBanner>
 
       {/* What We Do */}
       <section className="section-padding">

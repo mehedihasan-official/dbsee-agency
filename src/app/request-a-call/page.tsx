@@ -1,5 +1,6 @@
 "use client";
 
+import { HeroBanner } from "@/components/layout/HeroBanner";
 import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 
@@ -10,10 +11,10 @@ const COUNTRY_CODES = [
   { code: "KW", dial: "+965", flag: "🇰🇼" },
   { code: "QA", dial: "+974", flag: "🇶🇦" },
   { code: "OM", dial: "+968", flag: "🇴🇲" },
-  { code: "GB", dial: "+44",  flag: "🇬🇧" },
-  { code: "US", dial: "+1",   flag: "🇺🇸" },
-  { code: "NZ", dial: "+64",  flag: "🇳🇿" },
-  { code: "IN", dial: "+91",  flag: "🇮🇳" },
+  { code: "GB", dial: "+44", flag: "🇬🇧" },
+  { code: "US", dial: "+1", flag: "🇺🇸" },
+  { code: "NZ", dial: "+64", flag: "🇳🇿" },
+  { code: "IN", dial: "+91", flag: "🇮🇳" },
 ];
 
 export default function RequestCall() {
@@ -26,11 +27,15 @@ export default function RequestCall() {
     message: "",
   });
   const [countryDial, setCountryDial] = useState(COUNTRY_CODES[0]);
-  const [status, setStatus] = useState<"idle" | "pending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error"
+  >("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -59,66 +64,50 @@ export default function RequestCall() {
       if (!response.ok) throw new Error(result?.error || "Failed to submit");
 
       setStatus("success");
-      setFormData({ name: "", organization: "", position: "", email: "", mobile: "", message: "" });
+      setFormData({
+        name: "",
+        organization: "",
+        position: "",
+        email: "",
+        mobile: "",
+        message: "",
+      });
     } catch (error) {
       setStatus("error");
-      setErrorMessage(error instanceof Error ? error.message : "Unable to submit the form.");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Unable to submit the form.",
+      );
     }
   };
 
   return (
     <div className="min-h-screen bg-white">
-
       {/* ── Hero Banner ── */}
-      <section
-        className="relative overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #0d0d6b 0%, #1a1aad 40%, #2525c9 60%, #1a0066 100%)",
-          minHeight: "240px",
-        }}
-      >
-        {/* Abstract decorative circles */}
-        <div
-          className="absolute right-0 top-0 opacity-20"
-          style={{
-            width: "500px",
-            height: "500px",
-            background: "radial-gradient(circle, #4040ff 0%, transparent 70%)",
-            transform: "translate(150px, -150px)",
-          }}
-        />
-        <div
-          className="absolute left-1/4 bottom-0 opacity-10"
-          style={{
-            width: "300px",
-            height: "300px",
-            background: "radial-gradient(circle, #8080ff 0%, transparent 70%)",
-            transform: "translateY(100px)",
-          }}
-        />
-
-        <div className="relative z-10 flex items-center justify-center" style={{ minHeight: "240px" }}>
-          <h1
-            className="text-white text-center font-semibold"
-            style={{ fontSize: "2rem", letterSpacing: "0.01em" }}
-          >
-            Request a call
-          </h1>
-        </div>
-      </section>
+      <HeroBanner title="Request a call" />
 
       {/* ── Form Section ── */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-lg mx-auto">
-
           {status === "success" ? (
             <div className="text-center py-16">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="w-8 h-8 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
-              <h2 className="text-gray-900 text-2xl font-semibold mb-2">Request Submitted!</h2>
+              <h2 className="text-gray-900 text-2xl font-semibold mb-2">
+                Request Submitted!
+              </h2>
               <p className="text-gray-500 text-sm mb-6">
                 Thank you! We&apos;ll be in touch with you shortly.
               </p>
@@ -131,7 +120,6 @@ export default function RequestCall() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
-
               {/* Full Name */}
               <div>
                 <label className="block text-sm text-gray-700 mb-1.5">
@@ -185,8 +173,18 @@ export default function RequestCall() {
                 </label>
                 <div className="relative">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <svg
+                      className="w-4 h-4 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
                     </svg>
                   </div>
                   <input
@@ -212,7 +210,9 @@ export default function RequestCall() {
                     <select
                       value={countryDial.code}
                       onChange={(e) => {
-                        const found = COUNTRY_CODES.find(c => c.code === e.target.value);
+                        const found = COUNTRY_CODES.find(
+                          (c) => c.code === e.target.value,
+                        );
                         if (found) setCountryDial(found);
                       }}
                       className="appearance-none h-full pl-2 pr-6 py-2.5 bg-white text-sm text-gray-700 focus:outline-none border-r border-gray-300 cursor-pointer"
@@ -225,8 +225,18 @@ export default function RequestCall() {
                       ))}
                     </select>
                     <div className="absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      <svg
+                        className="w-3 h-3 text-gray-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -274,7 +284,6 @@ export default function RequestCall() {
               >
                 {status === "pending" ? "SUBMITTING..." : "SUBMIT"}
               </button>
-
             </form>
           )}
         </div>
@@ -291,7 +300,6 @@ export default function RequestCall() {
       >
         <FaWhatsapp className="w-7 h-7 text-white" />
       </a>
-
     </div>
   );
 }

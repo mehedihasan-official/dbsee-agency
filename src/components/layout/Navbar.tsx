@@ -83,7 +83,7 @@ export function Navbar() {
         {/* LEFT — Logo */}
         <Link href="/" className="shrink-0 flex items-center">
           <span className="font-heading font-bold text-white text-xl tracking-tight leading-none">
-            DBSEE
+             <span className="text-primary">DB</span>SEE
           </span>
         </Link>
 
