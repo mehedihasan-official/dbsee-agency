@@ -30,35 +30,35 @@ export function Footer() {
             {/* Social Icons */}
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/facebook"
                 aria-label="Facebook"
                 className="text-white hover:text-gray-300 transition-colors"
               >
                 <FaFacebookF className="h-4 w-4" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/instagram/"
                 aria-label="Instagram"
                 className="text-white hover:text-gray-300 transition-colors"
               >
                 <FaInstagram className="h-4 w-4" />
               </a>
               <a
-                href="#"
+                href="https://x.com/x"
                 aria-label="Twitter"
                 className="text-white hover:text-gray-300 transition-colors"
               >
                 <FaXTwitter className="h-4 w-4" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/linkedin/"
                 aria-label="LinkedIn"
                 className="text-white hover:text-gray-300 transition-colors"
               >
                 <FaLinkedinIn className="h-4 w-4" />
               </a>
               <a
-                href="#"
+                href="https://www.youtube.com"
                 aria-label="YouTube"
                 className="text-white hover:text-gray-300 transition-colors"
               >
