@@ -21,7 +21,7 @@ export default function Home() {
           <p className="text-primary text-sm font-bold uppercase tracking-widest mb-5">
             Attention Business Owners
           </p>
-          <h1 className="font-heading font-bold text-white text-4xl md:text-6xl leading-tight mb-6">
+          <h1 className="font-heading font-bold text-white text-3xl md:text-5xl leading-tight mb-6">
             Unleash Your Business&apos;s Potential with Bahrain&apos;s Premier
             Digital Marketing Agency
           </h1>

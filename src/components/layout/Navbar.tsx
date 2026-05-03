@@ -12,9 +12,9 @@ const navLinks = [
     label: "Services",
     href: "/services",
     submenu: [
-      { label: "Social Media Management", href: "/" },
+      { label: "Social Media Management", href: "/services/social-media-management" },
       { label: "Social Media Advertising", href: "/" },
-      { label: "TikTok Ads", href: "/" },
+      { label: "TikTok Ads", href: "/services/social-media-advertising" },
       { label: "Google Ads", href: "/" },
       { label: "Video Production", href: "/" },
       { label: "Coaching & Training", href: "/" },
