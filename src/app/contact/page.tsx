@@ -72,7 +72,7 @@ export default function Contact() {
       <section
         className="relative overflow-hidden flex items-center justify-center"
         style={{
-          background: "linear-gradient(135deg, #0d0d6b 0%, #1a1aad 50%, #2525c9 100%)",
+          background: "linear-gradient(135deg, #0d0d6b 20%, #1a1aad 60%, #2525c9 100%)",
           minHeight: "220px",
           paddingTop: "64px",
         }}
