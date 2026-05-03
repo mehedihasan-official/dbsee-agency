@@ -8,52 +8,34 @@ import { useEffect, useState } from "react";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-
-
   {
     label: "Services",
     href: "/services",
     submenu: [
-      {
-        label: "Social Media Management",
-        href: "/",
-      },
-      {
-        label: "Social Media Advertising",
-        href: "/",
-      },
+      { label: "Social Media Management", href: "/" },
+      { label: "Social Media Advertising", href: "/" },
       { label: "TikTok Ads", href: "/" },
       { label: "Google Ads", href: "/" },
       { label: "Video Production", href: "/" },
       { label: "Coaching & Training", href: "/" },
     ],
   },
-
-
   // {
   //   label: "Services",
   //   href: "/services",
   //   submenu: [
-  //     {
-  //       label: "Social Media Management",
-  //       href: "/services/social-media-management",
-  //     },
-  //     {
-  //       label: "Social Media Advertising",
-  //       href: "/services/social-media-advertising",
-  //     },
+  //     { label: "Social Media Management", href: "/services/social-media-management" },
+  //     { label: "Social Media Advertising", href: "/services/social-media-advertising" },
   //     { label: "TikTok Ads", href: "/services/tiktok-ads" },
   //     { label: "Google Ads", href: "/services/google-ads" },
   //     { label: "Video Production", href: "/services/video-production" },
   //     { label: "Coaching & Training", href: "/services/coaching-training" },
   //   ],
   // },
-
-
   { label: "Portfolio", href: "/" },
   { label: "Blog", href: "/" },
   { label: "Contact", href: "/contact" },
-  { label: "Limited Time Offer", href: "/" },
+  { label: "Limited Time Offer", href: "/limited-time-offer" },
 ];
 
 export function Navbar() {
@@ -61,48 +43,47 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [servicesTimeout, setServicesTimeout] = useState<NodeJS.Timeout | null>(
-    null,
-  );
+  const [servicesTimeout, setServicesTimeout] = useState<NodeJS.Timeout | null>(null);
   const [scrolled, setScrolled] = useState(false);
+
+  // Determine if we're on the home page (hero covers the top)
+  const isHome = pathname === "/";
 
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
   useEffect(() => {
-    return () => {
-      if (servicesTimeout) {
-        clearTimeout(servicesTimeout);
-      }
-    };
+    return () => { if (servicesTimeout) clearTimeout(servicesTimeout); };
   }, [servicesTimeout]);
+
+  const navBg = isHome
+    ? scrolled
+      ? "bg-[#0B1926]/95 backdrop-blur-md shadow-lg shadow-black/30"
+      : "bg-transparent"
+    : "bg-[#0B1926] border-b border-slate-800";
 
   return (
     <nav
-      className={`relative z-50 bg-transparent transition-shadow duration-300 ${
-        scrolled ? "shadow-lg shadow-black/50" : ""
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}
     >
       {/* ── Main bar ── */}
       <div className="max-w-7xl mx-auto px-6 h-16 grid grid-cols-[auto_1fr_auto] items-center gap-6">
         {/* LEFT — Logo */}
         <Link href="/" className="shrink-0 flex items-center">
           <span className="font-heading font-bold text-white text-xl tracking-tight leading-none">
-            GO<span className="text-primary">amplify</span>
+            DBSEE
           </span>
         </Link>
 
@@ -111,8 +92,7 @@ export function Navbar() {
           {navLinks.map((link) => {
             const isActive =
               pathname === link.href ||
-              (link.submenu &&
-                link.submenu.some((sub) => pathname === sub.href));
+              (link.submenu && link.submenu.some((sub) => pathname === sub.href));
             const isOffer = link.label === "Limited Time Offer";
             const hasSubmenu = link.submenu;
 
@@ -122,16 +102,11 @@ export function Navbar() {
                   <div
                     className="relative"
                     onMouseEnter={() => {
-                      if (servicesTimeout) {
-                        clearTimeout(servicesTimeout);
-                        setServicesTimeout(null);
-                      }
+                      if (servicesTimeout) { clearTimeout(servicesTimeout); setServicesTimeout(null); }
                       setServicesOpen(true);
                     }}
                     onMouseLeave={() => {
-                      const timeout = setTimeout(() => {
-                        setServicesOpen(false);
-                      }, 150); // 150ms delay
+                      const timeout = setTimeout(() => setServicesOpen(false), 150);
                       setServicesTimeout(timeout);
                     }}
                   >
@@ -140,29 +115,24 @@ export function Navbar() {
                         isOffer
                           ? "text-primary hover:text-primary-dark"
                           : isActive
-                            ? "text-white"
-                            : "text-white/60 hover:text-white"
+                          ? "text-white"
+                          : "text-gray-300 hover:text-white"
                       }`}
                     >
                       {link.label}
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform ${
-                          servicesOpen ? "rotate-180" : ""
-                        }`}
-                      />
+                      <ChevronDown className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
                     </button>
 
-                    {/* Desktop Submenu */}
                     {servicesOpen && (
-                      <div className="absolute top-full left-0 mt-2 w-64 bg-dark-card border border-dark-border rounded-xl shadow-xl py-2 z-50">
-                        {link.submenu.map((subLink) => (
+                      <div className="absolute top-full left-0 mt-2 w-64 bg-[#0B1926] border border-slate-700 rounded-xl shadow-2xl shadow-black/50 py-2 z-50">
+                        {link.submenu!.map((subLink) => (
                           <Link
                             key={subLink.href}
                             href={subLink.href}
-                            className={`block px-4 py-3 text-sm transition-colors hover:bg-white/5 ${
+                            className={`block px-4 py-3 text-sm transition-colors hover:bg-slate-800 ${
                               pathname === subLink.href
                                 ? "text-primary font-medium"
-                                : "text-white/80 hover:text-white"
+                                : "text-gray-300 hover:text-white"
                             }`}
                           >
                             {subLink.label}
@@ -178,8 +148,8 @@ export function Navbar() {
                       isOffer
                         ? "text-sm font-medium text-primary hover:text-primary-dark transition-colors whitespace-nowrap"
                         : isActive
-                          ? "text-sm font-medium text-white transition-colors whitespace-nowrap"
-                          : "text-sm font-medium text-white/60 hover:text-white transition-colors whitespace-nowrap"
+                        ? "text-sm font-medium text-white transition-colors whitespace-nowrap"
+                        : "text-sm font-medium text-gray-300 hover:text-white transition-colors whitespace-nowrap"
                     }
                   >
                     {link.label}
@@ -189,10 +159,12 @@ export function Navbar() {
             );
           })}
         </div>
+
+        {/* RIGHT — CTA + hamburger */}
         <div className="flex items-center gap-3 justify-end">
           <Link
             href="/request-a-call"
-            className="hidden lg:inline-flex items-center border border-white/40 hover:border-white text-white text-sm font-semibold rounded-full px-5 py-2 transition-all duration-200 hover:bg-white/5 whitespace-nowrap"
+            className="hidden lg:inline-flex items-center bg-primary hover:bg-primary-dark text-white text-sm font-semibold rounded-full px-5 py-2 transition-all duration-200 whitespace-nowrap"
           >
             Request a call
           </Link>
@@ -203,11 +175,7 @@ export function Navbar() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
@@ -218,22 +186,18 @@ export function Navbar() {
           mobileOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        {/* Backdrop — behind drawer, closes on click */}
         {mobileOpen && (
           <div
-            className="fixed inset-0 z-40 bg-black/50"
+            className="fixed inset-0 z-40 bg-black/60"
             onClick={() => setMobileOpen(false)}
-            aria-hidden="true"
           />
         )}
 
-        {/* Drawer panel — above backdrop */}
-        <div className="relative z-50 bg-black border-t border-white/10 px-6 py-6 flex flex-col gap-1">
+        <div className="relative z-50 bg-[#0B1926] border-t border-slate-700 px-6 py-6 flex flex-col gap-1">
           {navLinks.map((link) => {
             const isActive =
               pathname === link.href ||
-              (link.submenu &&
-                link.submenu.some((sub) => pathname === sub.href));
+              (link.submenu && link.submenu.some((sub) => pathname === sub.href));
             const isOffer = link.label === "Limited Time Offer";
             const hasSubmenu = link.submenu;
 
@@ -243,24 +207,17 @@ export function Navbar() {
                   <div>
                     <button
                       onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                      className={`flex items-center justify-between w-full py-3 text-sm font-medium border-b border-white/5 transition-colors ${
-                        isOffer
-                          ? "text-primary hover:text-primary-dark"
-                          : isActive
-                            ? "text-white"
-                            : "text-white/60 hover:text-white"
+                      className={`flex items-center justify-between w-full py-3 text-sm font-medium border-b border-slate-700 transition-colors ${
+                        isActive ? "text-white" : "text-gray-300 hover:text-white"
                       }`}
                     >
                       {link.label}
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
-                      />
+                      <ChevronDown className={`h-4 w-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
                     </button>
 
-                    {/* Mobile Submenu */}
                     {mobileServicesOpen && (
                       <div className="ml-4 mt-1 space-y-1">
-                        {link.submenu.map((subLink) => (
+                        {link.submenu!.map((subLink) => (
                           <Link
                             key={subLink.href}
                             href={subLink.href}
@@ -268,7 +225,7 @@ export function Navbar() {
                             className={`block py-2 text-sm transition-colors ${
                               pathname === subLink.href
                                 ? "text-primary font-medium"
-                                : "text-white/60 hover:text-white"
+                                : "text-gray-300 hover:text-white"
                             }`}
                           >
                             {subLink.label}
@@ -281,12 +238,12 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`py-3 text-sm font-medium border-b border-white/5 last:border-0 transition-colors ${
+                    className={`block py-3 text-sm font-medium border-b border-slate-700 last:border-0 transition-colors ${
                       isOffer
                         ? "text-primary hover:text-primary-dark"
                         : isActive
-                          ? "text-white"
-                          : "text-white/60 hover:text-white"
+                        ? "text-white"
+                        : "text-gray-300 hover:text-white"
                     }`}
                   >
                     {link.label}
@@ -299,7 +256,7 @@ export function Navbar() {
           <Link
             href="/request-a-call"
             onClick={() => setMobileOpen(false)}
-            className="mt-4 border border-white/40 hover:border-white text-white text-sm font-semibold rounded-full px-5 py-3 transition-all duration-200 hover:bg-white/5 text-center"
+            className="mt-4 bg-primary hover:bg-primary-dark text-white text-sm font-semibold rounded-full px-5 py-3 transition-all duration-200 text-center"
           >
             Request a call
           </Link>

@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${syne.variable}`}>
-      <body className="bg-dark text-white">
+    <html lang="en" className={`${inter.variable} ${syne.variable}`}>
+      <body className="bg-dark text-white antialiased">
         <Navbar />
         {children}
         <Footer />

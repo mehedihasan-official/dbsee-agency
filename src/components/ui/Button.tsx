@@ -11,6 +11,7 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export function Button({
@@ -21,6 +22,7 @@ export function Button({
   onClick,
   className,
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const baseClasses =
     "inline-flex items-center justify-center rounded-full font-semibold transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-dark";
@@ -54,7 +56,12 @@ export function Button({
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={classes}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

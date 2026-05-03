@@ -21,7 +21,7 @@ export function Hero() {
             <br />
             <span className="text-primary">Full Potential</span>
           </h1>
-          <p className="text-dark-muted text-lg md:text-xl max-w-3xl mx-auto mb-8">
+          <p className="text-white text-lg md:text-xl max-w-3xl mx-auto mb-8">
             We help businesses reach, engage, and convert more customers through
             proven social media marketing and digital advertising strategies.
           </p>
@@ -33,7 +33,7 @@ export function Hero() {
               View Our Services
             </Button>
           </div>
-          <p className="text-dark-muted text-sm">
+          <p className="text-white text-sm">
             Trusted by 200+ businesses worldwide
           </p>
         </motion.div>
