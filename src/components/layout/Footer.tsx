@@ -80,7 +80,7 @@ export function Footer() {
                 { label: "Blog", href: "/blog" },
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="text-white hover:text-gray-300 text-sm transition-colors"
@@ -114,7 +114,7 @@ export function Footer() {
                   href: "/services/video-production",
                 },
               ].map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="text-white hover:text-gray-300 text-sm transition-colors"
@@ -137,7 +137,7 @@ export function Footer() {
                 { label: "Coaching", href: "/services/coaching-training" },
                 { label: "Blog", href: "/blog" },
               ].map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="text-white hover:text-gray-300 text-sm transition-colors"

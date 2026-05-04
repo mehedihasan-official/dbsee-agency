@@ -12,28 +12,22 @@ const navLinks = [
     label: "Services",
     href: "/services",
     submenu: [
-      { label: "Social Media Management", href: "/services/social-media-management" },
-      { label: "Social Media Advertising", href: "/services/social-media-advertising" },
-      { label: "TikTok Ads", href: "/" },
-      { label: "Google Ads", href: "/" },
-      { label: "Video Production", href: "/" },
-      { label: "Coaching & Training", href: "/" },
+      {
+        label: "Social Media Management",
+        href: "/services/social-media-management",
+      },
+      {
+        label: "Social Media Advertising",
+        href: "/services/social-media-advertising",
+      },
+      { label: "TikTok Ads", href: "/services/tiktok-ads" },
+      { label: "Google Ads", href: "/services/google-ads" },
+      { label: "Video Production", href: "/services/video-production" },
+      { label: "Coaching & Training", href: "/services/coaching-training" },
     ],
   },
-  // {
-  //   label: "Services",
-  //   href: "/services",
-  //   submenu: [
-  //     { label: "Social Media Management", href: "/services/social-media-management" },
-  //     { label: "Social Media Advertising", href: "/services/social-media-advertising" },
-  //     { label: "TikTok Ads", href: "/services/tiktok-ads" },
-  //     { label: "Google Ads", href: "/services/google-ads" },
-  //     { label: "Video Production", href: "/services/video-production" },
-  //     { label: "Coaching & Training", href: "/services/coaching-training" },
-  //   ],
-  // },
-  { label: "Portfolio", href: "/" },
-  { label: "Blog", href: "/" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
   { label: "Limited Time Offer", href: "/limited-time-offer" },
 ];
@@ -43,7 +37,9 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [servicesTimeout, setServicesTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [servicesTimeout, setServicesTimeout] = useState<NodeJS.Timeout | null>(
+    null,
+  );
   const [scrolled, setScrolled] = useState(false);
 
   // Determine if we're on the home page (hero covers the top)
@@ -61,11 +57,15 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   useEffect(() => {
-    return () => { if (servicesTimeout) clearTimeout(servicesTimeout); };
+    return () => {
+      if (servicesTimeout) clearTimeout(servicesTimeout);
+    };
   }, [servicesTimeout]);
 
   const navBg = isHome
@@ -83,7 +83,7 @@ export function Navbar() {
         {/* LEFT — Logo */}
         <Link href="/" className="shrink-0 flex items-center">
           <span className="font-heading font-bold text-white text-xl tracking-tight leading-none">
-             <span className="text-primary">DB</span>SEE
+            <span className="text-primary">DB</span>SEE
           </span>
         </Link>
 
@@ -92,21 +92,28 @@ export function Navbar() {
           {navLinks.map((link) => {
             const isActive =
               pathname === link.href ||
-              (link.submenu && link.submenu.some((sub) => pathname === sub.href));
+              (link.submenu &&
+                link.submenu.some((sub) => pathname === sub.href));
             const isOffer = link.label === "Limited Time Offer";
             const hasSubmenu = link.submenu;
 
             return (
-              <div key={link.href} className="relative">
+              <div key={link.label} className="relative">
                 {hasSubmenu ? (
                   <div
                     className="relative"
                     onMouseEnter={() => {
-                      if (servicesTimeout) { clearTimeout(servicesTimeout); setServicesTimeout(null); }
+                      if (servicesTimeout) {
+                        clearTimeout(servicesTimeout);
+                        setServicesTimeout(null);
+                      }
                       setServicesOpen(true);
                     }}
                     onMouseLeave={() => {
-                      const timeout = setTimeout(() => setServicesOpen(false), 150);
+                      const timeout = setTimeout(
+                        () => setServicesOpen(false),
+                        150,
+                      );
                       setServicesTimeout(timeout);
                     }}
                   >
@@ -115,19 +122,21 @@ export function Navbar() {
                         isOffer
                           ? "text-primary hover:text-primary-dark"
                           : isActive
-                          ? "text-white"
-                          : "text-gray-300 hover:text-white"
+                            ? "text-white"
+                            : "text-gray-300 hover:text-white"
                       }`}
                     >
                       {link.label}
-                      <ChevronDown className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`}
+                      />
                     </button>
 
                     {servicesOpen && (
                       <div className="absolute top-full left-0 mt-2 w-64 bg-[#0B1926] border border-slate-700 rounded-xl shadow-2xl shadow-black/50 py-2 z-50">
                         {link.submenu!.map((subLink) => (
                           <Link
-                            key={subLink.href}
+                            key={subLink.label}
                             href={subLink.href}
                             className={`block px-4 py-3 text-sm transition-colors hover:bg-slate-800 ${
                               pathname === subLink.href
@@ -148,8 +157,8 @@ export function Navbar() {
                       isOffer
                         ? "text-sm font-medium text-primary hover:text-primary-dark transition-colors whitespace-nowrap"
                         : isActive
-                        ? "text-sm font-medium text-white transition-colors whitespace-nowrap"
-                        : "text-sm font-medium text-gray-300 hover:text-white transition-colors whitespace-nowrap"
+                          ? "text-sm font-medium text-white transition-colors whitespace-nowrap"
+                          : "text-sm font-medium text-gray-300 hover:text-white transition-colors whitespace-nowrap"
                     }
                   >
                     {link.label}
@@ -175,7 +184,11 @@ export function Navbar() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </div>
@@ -197,29 +210,34 @@ export function Navbar() {
           {navLinks.map((link) => {
             const isActive =
               pathname === link.href ||
-              (link.submenu && link.submenu.some((sub) => pathname === sub.href));
+              (link.submenu &&
+                link.submenu.some((sub) => pathname === sub.href));
             const isOffer = link.label === "Limited Time Offer";
             const hasSubmenu = link.submenu;
 
             return (
-              <div key={link.href}>
+              <div key={link.label}>
                 {hasSubmenu ? (
                   <div>
                     <button
                       onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                       className={`flex items-center justify-between w-full py-3 text-sm font-medium border-b border-slate-700 transition-colors ${
-                        isActive ? "text-white" : "text-gray-300 hover:text-white"
+                        isActive
+                          ? "text-white"
+                          : "text-gray-300 hover:text-white"
                       }`}
                     >
                       {link.label}
-                      <ChevronDown className={`h-4 w-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
+                      />
                     </button>
 
                     {mobileServicesOpen && (
                       <div className="ml-4 mt-1 space-y-1">
                         {link.submenu!.map((subLink) => (
                           <Link
-                            key={subLink.href}
+                            key={subLink.label}
                             href={subLink.href}
                             onClick={() => setMobileOpen(false)}
                             className={`block py-2 text-sm transition-colors ${
@@ -242,8 +260,8 @@ export function Navbar() {
                       isOffer
                         ? "text-primary hover:text-primary-dark"
                         : isActive
-                        ? "text-white"
-                        : "text-gray-300 hover:text-white"
+                          ? "text-white"
+                          : "text-gray-300 hover:text-white"
                     }`}
                   >
                     {link.label}
