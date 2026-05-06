@@ -75,15 +75,9 @@ src/
    ```bash
    npm install
    ```
+   
 
-3. **Configure Environment Variables**:
-   Create a `.env.local` file in the root directory:
-
-   ```env
-   MONGODB_URI=your_mongodb_connection_string
-   ```
-
-4. **Run the development server**:
+3. **Run the development server**:
    ```bash
    npm run dev
    ```
