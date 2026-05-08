@@ -1,8 +1,32 @@
+/**
+ * Button Component
+ *
+ * Reusable button component with multiple variants and sizes.
+ * Can be rendered as a standard button or a link.
+ *
+ * @file Reusable button UI component
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
+/**
+ * Props for Button component
+ *
+ * @interface ButtonProps
+ * @property {React.ReactNode} children - Button text or content
+ * @property {"primary" | "secondary" | "outline"} [variant="primary"] - Button style variant
+ * @property {"sm" | "md" | "lg"} [size="md"] - Button size
+ * @property {string} [href] - If provided, renders as a link instead of button
+ * @property {() => void} [onClick] - Click handler function
+ * @property {string} [className] - Additional CSS classes
+ * @property {"button" | "submit" | "reset"} [type="button"] - HTML button type
+ * @property {boolean} [disabled=false] - Whether button is disabled
+ */
 interface ButtonProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "outline";
@@ -14,6 +38,13 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
+/**
+ * Button - Renders a styled button or link element
+ *
+ * @component
+ * @param {ButtonProps} props - Component props
+ * @returns {JSX.Element} Button or link element
+ */
 export function Button({
   children,
   variant = "primary",

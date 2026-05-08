@@ -1,3 +1,16 @@
+/**
+ * Placeholder Data Module
+ *
+ * Contains mock data for services, blog posts, portfolio items, testimonials, and team members.
+ * This data is used throughout the application for development and demonstration purposes.
+ *
+ * In a production environment, this data would be fetched from a CMS or database.
+ * Currently, data is stored locally for quick iteration and testing.
+ *
+ * @file Mock data and placeholder content
+ * @author DBSEE Agency
+ */
+
 import {
   BlogPost,
   PortfolioItem,
@@ -6,6 +19,11 @@ import {
   Testimonial,
 } from "@/types";
 
+/**
+ * Array of service offerings
+ * Each service includes name, description, features, statistics, and FAQs
+ * Used to populate the services page and home page service showcase
+ */
 export const services: Service[] = [
   {
     name: "Social Media Management",

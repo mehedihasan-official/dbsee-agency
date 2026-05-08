@@ -1,6 +1,43 @@
+/**
+ * Form Submission API Route
+ *
+ * Handles POST requests to save form submissions to MongoDB.
+ * Used by contact forms, call request forms, and other form components.
+ *
+ * Endpoint: POST /api/forms
+ *
+ * @file API route for form submission handling
+ * @author DBSEE Agency
+ */
+
 import { getMongoDb } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
+/**
+ * POST Handler - Receives and saves form submissions
+ *
+ * Expected request body:
+ * ```json
+ * {
+ *   "type": "contact" | "call-request" | ... (optional, defaults to "contact"),
+ *   "name": "John Doe" (required),
+ *   "email": "john@example.com" (required),
+ *   "phone": "+1234567890" (optional),
+ *   "service": "Social Media Management" (optional),
+ *   "bestTime": "Morning" (optional),
+ *   "message": "Inquiry details" (optional)
+ * }
+ * ```
+ *
+ * Returns:
+ * - Success (200): { success: true, id: "<mongodb_id>" }
+ * - Validation Error (400): { error: "validation message" }
+ * - Server Error (500): { error: "Unable to save form submission.", details: "error info" }
+ *
+ * @async
+ * @param {Request} request - Incoming HTTP request with form data
+ * @returns {Promise<NextResponse>} JSON response with status and data
+ */
 export async function POST(request: Request) {
   try {
     const body = await request.json();

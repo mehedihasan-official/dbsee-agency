@@ -1,3 +1,19 @@
+/**
+ * Contact Page
+ *
+ * Allows users to submit contact form inquiries.
+ * Features:
+ * - Multi-line text form for inquiries
+ * - Country code selector for phone numbers
+ * - Form validation
+ * - Submission to MongoDB via API
+ * - Success/error message display
+ *
+ * @file Contact form page
+ * @author DBSEE Agency
+ * @page /contact
+ */
+
 "use client";
 
 import { HeroBanner } from "@/components/layout/HeroBanner";
@@ -10,6 +26,10 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 
+/**
+ * Country dialing codes for phone field
+ * Allows users to select their country for proper phone formatting
+ */
 const COUNTRY_CODES = [
   { code: "BH", dial: "+973", flag: "🇧🇭" },
   { code: "SA", dial: "+966", flag: "🇸🇦" },

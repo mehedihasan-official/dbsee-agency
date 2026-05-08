@@ -1,12 +1,34 @@
+/**
+ * Blog Page
+ *
+ * Main blog listing page that displays all blog posts in a grid.
+ * Includes pagination UI for browsing through posts.
+ *
+ * @file Blog listing page
+ * @author DBSEE Agency
+ * @page /blog
+ */
+
 import { BlogGrid } from "@/components/blog/BlogGrid";
 import { HeroBanner } from "@/components/layout/HeroBanner";
 
+/**
+ * Blog - Blog listing page component
+ *
+ * Displays:
+ * - Hero banner with blog title and description
+ * - Grid of blog posts (using BlogGrid component)
+ * - Pagination controls
+ *
+ * @page
+ * @returns {JSX.Element} Blog page with post grid
+ */
 export default function Blog() {
   return (
     <div>
       {/* Hero */}
-      <HeroBanner 
-        title="DBSEE Blog" 
+      <HeroBanner
+        title="DBSEE Blog"
         description="Industry insights, marketing tips, and strategies to help you grow your business online."
       />
 

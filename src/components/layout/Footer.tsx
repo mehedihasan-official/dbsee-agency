@@ -1,3 +1,17 @@
+/**
+ * Footer Component
+ *
+ * Renders the site-wide footer with:
+ * - Company branding and location information
+ * - Social media links (Facebook, Instagram, Twitter, LinkedIn, YouTube)
+ * - Navigation links organized by category (Company, Services, Solutions)
+ * - Responsive grid layout that adapts to mobile, tablet, and desktop
+ *
+ * @file Footer component for site-wide footer
+ * @author DBSEE Agency
+ * @component
+ */
+
 import Link from "next/link";
 import {
   FaFacebookF,
@@ -7,6 +21,13 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 
+/**
+ * Footer - Site-wide footer component
+ * Displays company info, social links, and navigation
+ *
+ * @component
+ * @returns {JSX.Element} Footer section with multiple link columns
+ */
 export function Footer() {
   return (
     <footer className="bg-[#0B1926] border-t border-slate-700 pt-16 pb-8 px-4">

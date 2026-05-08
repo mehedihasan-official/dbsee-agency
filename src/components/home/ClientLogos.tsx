@@ -1,5 +1,27 @@
+/**
+ * Client Logos Component
+ *
+ * Displays a scrolling marquee of client logos to build trust and credibility.
+ * Logos scroll horizontally with gradient fade effects at edges.
+ *
+ * @file Client logos scrolling carousel
+ * @author DBSEE Agency
+ * @component
+ */
+
 import { clientLogos } from "@/lib/placeholder-data";
 
+/**
+ * ClientLogos - Renders scrolling marquee of client logos
+ *
+ * Features:
+ * - Infinite scroll animation
+ * - Gradient fade effects on left and right sides
+ * - Responsive layout
+ *
+ * @component
+ * @returns {JSX.Element} Scrolling client logos section
+ */
 export function ClientLogos() {
   // Duplicate logos for seamless loop
   const duplicatedLogos = [...clientLogos, ...clientLogos];

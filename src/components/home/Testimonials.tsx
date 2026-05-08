@@ -1,3 +1,14 @@
+/**
+ * Testimonials Section Component (Home Page)
+ *
+ * Displays client testimonials in a grid of cards.
+ * Includes client name, role, company, and quote.
+ *
+ * @file Client testimonials showcase section for homepage
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -5,6 +16,18 @@ import { testimonials } from "@/lib/placeholder-data";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+/**
+ * Testimonials - Renders grid of client testimonial cards
+ *
+ * Features:
+ * - Animated cards on scroll into view
+ * - Client avatar, name, role, and company
+ * - Decorative quotation mark
+ * - Responsive grid layout
+ *
+ * @component
+ * @returns {JSX.Element} Testimonials section
+ */
 export function Testimonials() {
   return (
     <section className="section-padding">

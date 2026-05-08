@@ -1,9 +1,24 @@
+/**
+ * Why Choose DBSEE Section Component (Home Page)
+ *
+ * Highlights key company strengths and differentiators.
+ * Shows three main features: Results-Driven, Expert Team, Commitment to Excellence.
+ *
+ * @file Company differentiators section for homepage
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { motion } from "framer-motion";
 import { Eye, Heart, Target } from "lucide-react";
 
+/**
+ * Features array - Core company strengths
+ * Each feature has an icon, title, and description
+ */
 const features = [
   {
     icon: Target,

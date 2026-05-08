@@ -1,3 +1,18 @@
+/**
+ * About Page
+ *
+ * Showcases DBSEE Agency's team, company information, and client portfolio.
+ * Displays:
+ * - Hero banner with company tagline
+ * - Team members with roles and photos
+ * - Client logos
+ * - Company information and values
+ *
+ * @file About/company page
+ * @author DBSEE Agency
+ * @page /about
+ */
+
 "use client";
 
 import { HeroBanner } from "@/components/layout/HeroBanner";
@@ -5,6 +20,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa6";
 
+/**
+ * Team members array with name, role, and avatar index
+ * Used to display the company team in a grid layout
+ */
 // 25 team members matching the screenshot grid
 const teamMembers = [
   { name: "Douglas Cordwell", role: "Managing Director", img: 1 },

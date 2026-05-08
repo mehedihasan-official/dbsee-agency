@@ -1,5 +1,26 @@
+/**
+ * Section Heading Component
+ *
+ * Reusable heading component for section introductions.
+ * Displays an eyebrow text, main title, and optional subtitle.
+ *
+ * @file Reusable section heading UI component
+ * @author DBSEE Agency
+ * @component
+ */
+
 import { cn } from "@/lib/utils";
 
+/**
+ * Props for SectionHeading component
+ *
+ * @interface SectionHeadingProps
+ * @property {string} eyebrow - Small label above title (e.g., "OUR SERVICES")
+ * @property {string} title - Main heading text
+ * @property {string} [subtitle] - Optional subtitle or description
+ * @property {"center" | "left"} [align="center"] - Text alignment
+ * @property {string} [className] - Additional CSS classes
+ */
 interface SectionHeadingProps {
   eyebrow: string;
   title: string;
@@ -8,6 +29,13 @@ interface SectionHeadingProps {
   className?: string;
 }
 
+/**
+ * SectionHeading - Renders a styled section heading
+ *
+ * @component
+ * @param {SectionHeadingProps} props - Component props
+ * @returns {JSX.Element} Heading section
+ */
 export function SectionHeading({
   eyebrow,
   title,

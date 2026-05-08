@@ -1,9 +1,31 @@
+/**
+ * Request a Call Page
+ *
+ * Form page for scheduling consultations with DBSEE Agency.
+ * Allows users to submit their contact information and request a callback.
+ *
+ * Features:
+ * - Multi-step form with validation
+ * - Country code selector for international contacts
+ * - Message field for specific inquiry details
+ * - Submission to MongoDB via API
+ * - WhatsApp contact option
+ *
+ * @file Call request form page
+ * @author DBSEE Agency
+ * @page /request-a-call
+ */
+
 "use client";
 
 import { HeroBanner } from "@/components/layout/HeroBanner";
 import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 
+/**
+ * Country codes with phone dial prefixes
+ * Used for international phone number formatting
+ */
 const COUNTRY_CODES = [
   { code: "BH", dial: "+973", flag: "🇧🇭" },
   { code: "SA", dial: "+966", flag: "🇸🇦" },

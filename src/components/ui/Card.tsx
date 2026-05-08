@@ -1,7 +1,30 @@
+/**
+ * Card Component
+ *
+ * Reusable card component for displaying content in a contained, styled box.
+ * Supports images, icons, titles, descriptions, and optional links.
+ *
+ * @file Reusable card UI component
+ * @author DBSEE Agency
+ * @component
+ */
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * Props for Card component
+ *
+ * @interface CardProps
+ * @property {string} title - Card title/heading
+ * @property {string} description - Card description text
+ * @property {string} [icon] - Icon emoji or character
+ * @property {string} [href] - Link URL (makes card clickable)
+ * @property {string} [image] - Image URL for card image
+ * @property {string} [className] - Additional CSS classes
+ * @property {React.ReactNode} [children] - Child elements
+ */
 interface CardProps {
   title: string;
   description: string;
@@ -12,6 +35,13 @@ interface CardProps {
   children?: React.ReactNode;
 }
 
+/**
+ * Card - Renders a styled card container
+ *
+ * @component
+ * @param {CardProps} props - Component props
+ * @returns {JSX.Element} Card element (wrapped in Link if href provided)
+ */
 export function Card({
   title,
   description,

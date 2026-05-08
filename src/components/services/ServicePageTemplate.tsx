@@ -1,8 +1,21 @@
+/**
+ * Service Page Template Component
+ *
+ * Reusable template for displaying individual service pages.
+ * Dynamically renders service details, features, FAQs, and stats based on service data.
+ *
+ * Usage: Each service page (e.g., Social Media Management, TikTok Ads) uses this template
+ * and passes different service data to display.
+ *
+ * @file Reusable service page template component
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { CtaBanner } from "@/components/home/CtaBanner";
 import { HeroBanner } from "@/components/layout/HeroBanner";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Service } from "@/types";
@@ -10,10 +23,30 @@ import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
+/**
+ * Props for ServicePageTemplate component
+ *
+ * @interface ServicePageTemplateProps
+ * @property {Service} service - Complete service data object
+ */
 interface ServicePageTemplateProps {
   service: Service;
 }
 
+/**
+ * ServicePageTemplate - Renders complete service detail page
+ *
+ * Sections included:
+ * - Hero banner with service name and description
+ * - Feature list
+ * - Statistics
+ * - FAQ accordion
+ * - Call-to-action banner
+ *
+ * @component
+ * @param {ServicePageTemplateProps} props - Component props
+ * @returns {JSX.Element} Complete service page
+ */
 export function ServicePageTemplate({ service }: ServicePageTemplateProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -24,10 +57,7 @@ export function ServicePageTemplate({ service }: ServicePageTemplateProps) {
   return (
     <div>
       {/* Hero Section */}
-      <HeroBanner 
-        title={service.name} 
-        description={service.shortDescription}
-      >
+      <HeroBanner title={service.name} description={service.shortDescription}>
         <div className="mt-8">
           <Button href="/request-a-call" size="lg">
             Get Started Today

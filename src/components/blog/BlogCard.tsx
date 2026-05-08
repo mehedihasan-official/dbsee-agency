@@ -1,7 +1,31 @@
+/**
+ * Blog Card Component
+ *
+ * Displays a single blog post in a card format.
+ * Includes featured image, title, category, author, date, and read time.
+ *
+ * @file Blog post card component
+ * @author DBSEE Agency
+ * @component
+ */
+
 import { Badge } from "@/components/ui/Badge";
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * BlogPost - Interface for blog post data
+ *
+ * @interface BlogPost
+ * @property {string} title - Post title
+ * @property {string} slug - URL-friendly post identifier
+ * @property {string} date - Publication date
+ * @property {string} category - Post category
+ * @property {string} excerpt - Short preview text
+ * @property {string} readTime - Estimated read duration (e.g., "5 min read")
+ * @property {string} image - Featured image URL
+ * @property {string} author - Author name
+ */
 interface BlogPost {
   title: string;
   slug: string;
@@ -13,10 +37,25 @@ interface BlogPost {
   author: string;
 }
 
+/**
+ * Props for BlogCard component
+ *
+ * @interface BlogCardProps
+ * @property {BlogPost} post - Blog post data object
+ */
 interface BlogCardProps {
   post: BlogPost;
 }
 
+/**
+ * BlogCard - Renders a clickable blog post card
+ *
+ * Features hover effects and links to full post
+ *
+ * @component
+ * @param {BlogCardProps} props - Component props
+ * @returns {JSX.Element} Blog card linked to post detail page
+ */
 export function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`}>

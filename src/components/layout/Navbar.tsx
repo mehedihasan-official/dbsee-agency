@@ -5,6 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+/**
+ * Navigation links configuration
+ * Defines all main menu items and their submenu items (if applicable)
+ * Services menu has submenu with different service offerings
+ */
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },

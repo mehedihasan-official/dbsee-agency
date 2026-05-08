@@ -1,8 +1,28 @@
+/**
+ * Statistics Section Component (Home Page)
+ *
+ * Displays key business statistics with animated numbers.
+ * Shows impressive metrics to build trust and credibility.
+ *
+ * @file Statistics showcase section for homepage
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { stats } from "@/lib/placeholder-data";
 import { motion } from "framer-motion";
 
+/**
+ * Stats - Renders animated statistics grid
+ *
+ * Displays business metrics (e.g., "200+ Brands Managed", "85% Engagement Increase")
+ * with staggered animations as section comes into view.
+ *
+ * @component
+ * @returns {JSX.Element} Statistics section with animated counters
+ */
 export function Stats() {
   return (
     <section className="py-16 bg-dark-card border-y border-dark-border">

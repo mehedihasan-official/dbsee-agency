@@ -1,3 +1,14 @@
+/**
+ * Services Section Component (Home Page)
+ *
+ * Displays available services in an animated grid.
+ * Each service is a clickable card that links to its detail page.
+ *
+ * @file Services showcase section for homepage
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { Card } from "@/components/ui/Card";
@@ -6,6 +17,17 @@ import { services } from "@/lib/placeholder-data";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+/**
+ * ServicesSection - Renders grid of services with animations
+ *
+ * Features:
+ * - Staggered animation on scroll into view
+ * - Clickable cards that link to service detail pages
+ * - Hover effects with arrow icon animation
+ *
+ * @component
+ * @returns {JSX.Element} Services grid section
+ */
 export function ServicesSection() {
   return (
     <section className="section-padding">

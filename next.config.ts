@@ -1,5 +1,22 @@
+/**
+ * Next.js Configuration
+ *
+ * Configures Next.js behavior including:
+ * - Image optimization settings
+ * - Remote image sources allowed for Next.js Image component
+ *
+ * @file Next.js configuration
+ * @author DBSEE Agency
+ */
+
 import type { NextConfig } from "next";
 
+/**
+ * nextConfig - Next.js configuration object
+ *
+ * Images: Allows external images from trusted sources (Unsplash, Picsum, Gravatar, etc.)
+ * for optimization and performance
+ */
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [

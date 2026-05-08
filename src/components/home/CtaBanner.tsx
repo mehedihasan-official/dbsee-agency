@@ -1,8 +1,30 @@
+/**
+ * Call-to-Action Banner Component
+ *
+ * Prominent banner section that encourages users to take action.
+ * Typically placed at the end of pages or sections to drive conversions.
+ *
+ * Features:
+ * - Animated entrance on scroll into view
+ * - Large, compelling heading
+ * - Button linking to call request form
+ *
+ * @file CTA banner component
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 
+/**
+ * CtaBanner - Renders animated call-to-action banner
+ *
+ * @component
+ * @returns {JSX.Element} CTA banner section
+ */
 export function CtaBanner() {
   return (
     <section className="section-padding bg-dark-card border-y border-dark-border">

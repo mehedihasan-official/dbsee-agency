@@ -1,9 +1,32 @@
+/**
+ * Hero Section Component (Home Page)
+ *
+ * Main hero section for the homepage.
+ * Features animated heading, call-to-action buttons, and trust statement.
+ *
+ * @file Hero section for homepage
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 
+/**
+ * Hero - Renders the main hero section for the homepage
+ *
+ * Includes:
+ * - Animated heading with primary color accent
+ * - Subheading description
+ * - Two call-to-action buttons
+ * - Trust statement
+ *
+ * @component
+ * @returns {JSX.Element} Hero section
+ */
 export function Hero() {
   return (
     <section className="min-h-screen flex items-center bg-[radial-gradient(ellipse_at_top,_#FF6B3515_0%,_transparent_60%)] relative overflow-hidden">

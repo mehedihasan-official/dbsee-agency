@@ -1,5 +1,27 @@
+/**
+ * Hero Banner Component
+ *
+ * Reusable hero section component used across multiple pages.
+ * Features dynamic gradient backgrounds, abstract shapes, and decorative SVG elements.
+ *
+ * Usage: Ideal for page headers, section introductions, and call-to-action areas.
+ *
+ * @file Reusable hero/banner component
+ * @author DBSEE Agency
+ * @component
+ */
+
 import { ReactNode } from "react";
 
+/**
+ * Props for HeroBanner component
+ *
+ * @interface HeroBannerProps
+ * @property {string} title - Main heading text (required)
+ * @property {string} [description] - Optional subtitle/description text
+ * @property {ReactNode} [children] - Optional child elements for additional content (e.g., buttons)
+ * @property {string} [className] - Optional additional CSS classes for styling
+ */
 interface HeroBannerProps {
   title: string;
   description?: string;
@@ -7,28 +29,49 @@ interface HeroBannerProps {
   className?: string;
 }
 
-export function HeroBanner({ title, description, children, className = "" }: HeroBannerProps) {
+/**
+ * HeroBanner - Renders a visually appealing hero section
+ *
+ * Creates a gradient background with animated decorative elements including:
+ * - Gradient background (blue to cyan)
+ * - Blurred circular shapes for modern aesthetic
+ * - SVG decorative curves
+ * - Responsive typography
+ *
+ * @component
+ * @param {HeroBannerProps} props - Component props
+ * @returns {JSX.Element} Hero banner section
+ */
+export function HeroBanner({
+  title,
+  description,
+  children,
+  className = "",
+}: HeroBannerProps) {
   return (
     <section
       className={`relative overflow-hidden flex items-center justify-center min-h-[280px] pt-24 pb-16 px-4 ${className}`}
       style={{
-        background: "linear-gradient(135deg, #020024 0%, #090979 35%, #00d4ff 100%)",
+        background:
+          "linear-gradient(135deg, #020024 0%, #090979 35%, #00d4ff 100%)",
       }}
     >
       {/* Abstract Background Elements */}
-      <div 
+      <div
         className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full opacity-30 blur-[80px] pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 100%)",
+          background:
+            "radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 100%)",
         }}
       />
-      <div 
+      <div
         className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-20 blur-[100px] pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 100%)",
+          background:
+            "radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 100%)",
         }}
       />
-      
+
       {/* Decorative Curves (SVG) */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <svg

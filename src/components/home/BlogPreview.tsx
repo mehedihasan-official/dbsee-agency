@@ -1,3 +1,14 @@
+/**
+ * Blog Preview Component (Home Page)
+ *
+ * Displays featured blog posts on the home page.
+ * Shows the 3 most recent blog posts with a link to view all posts.
+ *
+ * @file Blog preview section for homepage
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { BlogCard } from "@/components/blog/BlogCard";
@@ -6,6 +17,15 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { blogPosts } from "@/lib/placeholder-data";
 import { motion } from "framer-motion";
 
+/**
+ * BlogPreview - Renders featured blog posts section
+ *
+ * Displays the 3 most recent blog posts with animations
+ * and includes a button to view all blog posts.
+ *
+ * @component
+ * @returns {JSX.Element} Blog preview section
+ */
 export function BlogPreview() {
   const featuredPosts = blogPosts.slice(0, 3);
 

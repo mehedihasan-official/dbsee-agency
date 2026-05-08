@@ -1,3 +1,14 @@
+/**
+ * Portfolio Grid Component
+ *
+ * Displays portfolio items in a filterable grid layout.
+ * Users can filter items by category (All, Social Media, Ads, Video).
+ *
+ * @file Portfolio items grid with category filtering
+ * @author DBSEE Agency
+ * @component
+ */
+
 "use client";
 
 import { Badge } from "@/components/ui/Badge";
@@ -5,8 +16,19 @@ import { portfolioItems } from "@/lib/placeholder-data";
 import Image from "next/image";
 import { useState } from "react";
 
+/**
+ * Available filter categories for portfolio items
+ */
 const categories = ["All", "Social Media", "Ads", "Video"];
 
+/**
+ * PortfolioGrid - Renders filterable grid of portfolio items
+ *
+ * Features category filter buttons and responsive grid layout
+ *
+ * @component
+ * @returns {JSX.Element} Portfolio grid with filters
+ */
 export function PortfolioGrid() {
   const [activeCategory, setActiveCategory] = useState("All");
 
